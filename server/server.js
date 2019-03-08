@@ -16,8 +16,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-//Esta linea indica que traiga el archivo de rutas
-app.use(require('./routes/usuario'));
+
+// //Estas lineas indican rutas
+app.use(require('./routes/index'));
+
+
+
 
 //Conexion a la base de datos
 mongoose.connect(process.env.URLDB,
@@ -26,6 +30,8 @@ mongoose.connect(process.env.URLDB,
     if( err ) throw err;
     console.log('BASE DE DATOS ONLINE');
 });
+
+
 
 app.listen(process.env.PORT, ( ) =>{
     console.log('Escuchando el puerto: ', process.env.PORT);

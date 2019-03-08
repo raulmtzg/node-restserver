@@ -1,18 +1,20 @@
 
 const express = require('express');
 
-//Se importa el modelo usuario al servidor
-const Usuario = require('../models/usuario');
-
-const app = express();
-
 const bcrypt = require('bcrypt');
 
 const _ = require('underscore');
 
+//Se importa el modelo usuario al servidor
+const Usuario = require('../models/usuario');
+
+//Esta linea hace la destructuracion para obtener el middleware con la validacion del token
+const { verficaToken, verficaAdmin_Role } = require('../middlewares/autenticacion');
+
+const app = express();
 
 
-app.get('/usuario', function (req, res) {
+app.get('/usuario', verficaToken, (req, res) => {
 
     //Parametro para indicar desde que registro quiere ver 
     //validar que sea numero
@@ -54,7 +56,7 @@ app.get('/usuario', function (req, res) {
 
 });
   
-  app.post('/usuario', function (req, res) {
+  app.post('/usuario', [verficaToken, verficaAdmin_Role], function (req, res) {
   
     let body = req.body;
 
@@ -90,7 +92,7 @@ app.get('/usuario', function (req, res) {
   
   });
   
-  app.put('/usuario/:id', function (req, res) {
+  app.put('/usuario/:id', [verficaToken, verficaAdmin_Role], function (req, res) {
 
     let id = req.params.id;
 
@@ -126,7 +128,7 @@ app.get('/usuario', function (req, res) {
 
   });
   
-  app.delete('/usuario/:id', function (req, res) {
+  app.delete('/usuario/:id', [verficaToken, verficaAdmin_Role], function (req, res) {
 
     let id = req.params.id;
 
