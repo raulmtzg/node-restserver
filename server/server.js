@@ -5,6 +5,8 @@ const express = require('express');
 //Conexion a BD
 const mongoose = require('mongoose');
 
+const path = require('path');
+
 
 const app = express();
 
@@ -14,7 +16,11 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }))
  
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
+
+//Habilitar carpeta public para acceder desde cualquier lugar
+app.use( express.static(path.resolve(__dirname, '../public')));
 
 
 // //Estas lineas indican rutas
