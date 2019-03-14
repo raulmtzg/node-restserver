@@ -22,7 +22,7 @@ app.get('/usuario', verficaToken, (req, res) => {
     desde = Number(desde);
 
     let limite = req.query.limite || 5;
-    limite = Number(limite)
+    limite = Number(limite);
 
 
     //El segundo parametro del objeto find, especifica solo los campos que queremos devolver de la consulta
