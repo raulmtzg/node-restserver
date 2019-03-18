@@ -112,7 +112,7 @@ app.get('/producto/buscar/:termino', verficaToken, (req, res) =>{
     // 'i': No es sencible a mayusculas / minusculas
     let regex = new RegExp(termino, 'i');
 
-    Producto.find({ nombre: regex})
+    Producto.find({ nombre: regex })
         .populate('categoria', 'descripcion')
         .exec( (err, productos) =>{
 
